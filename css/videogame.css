@@ -1,3 +1,7 @@
+* {
+	font-family: "Comic Sans MS", sans-serif;
+}
+
 #screen {
 	margin: 0;
 	padding: 20px;
@@ -5,36 +9,56 @@
 }
 
 #board {
-	width: 400px;
-	height: 300px;
+	width: 480px;
+	height: 360px;
 	background-color: lightgrey;
 	float:left;
-}
-
-#menu {
-	margin-left: 20px;
-	padding: 5px;
-	width: 180px;
-	height: 280px;
-	float:left;
-	border-style: dashed;
-	border-color: purple;
-	border-width: 5px;
-}
-
-#controlPanel {
-	float: left;
-	width: 580px;
-	margin: 5px;
-	padding: 5px;
 }
 
 .cell {
 	margin: 5px;
 	float: left;
-	width: 40px;
-	height: 40px;
-	background-color: violet;
+	width: 50px;
+	height: 50px;
+	background-color: #8299ee;
+}
+
+#menu {
+	align-items: center;
+	margin-left: 20px;
+	padding: 20px;
+	width: 180px;
+	height: 370px;
+	float:left;
+	color: white;
+	background: rgba(0, 0, 0, 0.8);
+	border-radius: 10px;
+	box-shadow: 0 0.4px 0.4px rgba(128, 128, 128, 0.109),
+	0 1px 1px rgba(128, 128, 128, 0.155),
+	0 2.1px 2.1px rgba(128, 128, 128, 0.195),
+	0 4.4px 4.4px rgba(128, 128, 128, 0.241),
+	0 12px 12px rgba(128, 128, 128, 0.35);
+}
+
+#controlPanel {
+	float: left;
+	width: 350px;
+	margin: 5px;
+	padding: 5px;
+}
+
+.controlPanel {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: white;
+	background: rgba(0, 0, 0, 0.8);
+	border-radius: 10px;
+	box-shadow: 0 0.4px 0.4px rgba(128, 128, 128, 0.109),
+	0 1px 1px rgba(128, 128, 128, 0.155),
+	0 2.1px 2.1px rgba(128, 128, 128, 0.195),
+	0 4.4px 4.4px rgba(128, 128, 128, 0.241),
+	0 12px 12px rgba(128, 128, 128, 0.35);
 }
 
 .target {
@@ -47,4 +71,41 @@
 
 .hit {
 	background-color: green;
+}
+
+button{
+	background:#8299ee;
+	color:#fff;
+	border:none;
+	position:relative;
+	height:60px;
+	font-size:1.6em;
+	padding:0 2em;
+	cursor:pointer;
+	transition:800ms ease all;
+	outline:none;
+}
+button:hover{
+	background:#fff;
+	color:#8299ee;
+}
+button:before,button:after{
+	content:'';
+	position:absolute;
+	top:0;
+	right:0;
+	height:5px;
+	width:0;
+	background: #8299ee;
+	transition:400ms ease all;
+}
+button:after{
+	right:inherit;
+	top:inherit;
+	left:0;
+	bottom:0;
+}
+button:hover:before,button:hover:after{
+	width:100%;
+	transition:800ms ease all;
 }

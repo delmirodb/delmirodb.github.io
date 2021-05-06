@@ -8,7 +8,7 @@
 		<link rel="stylesheet" href="css/validation.css">
 		<title>Videojuego</title>
 	</head>
-	<body onload="inicializar()">
+	<body>
 		<div id="screen">
 			<div id="board">
 				<div id="target0" class="cell" onmousedown="pulsado(0)"></div>
@@ -65,19 +65,24 @@
 				<p id="name">Nombre</p>
 				<h3>Puntos</h3>
 				<p id="score">0</p>
+				<h3>Racha de aciertos</h3>
+				<p id ="racha">0</p>
+			</div>
+			<div>
+				<form id="controlPanel" method="post" action="index.html" class="controlPanel">
+					<label for="nameForm">Nuevo nombre</label>
+					<input id="nameForm">
+					<p id="nameError" class="validationError"></p>
+					<label for="pointsPerHitForm">Puntos por acertar</label>
+					<input id="pointsPerHitForm">
+					<p id="pointsPerHitError" class="validationError"></p>
+					<label for="pointsPerMissForm">Puntos por fallar</label>
+					<input id="pointsPerMissForm">
+					<p id="pointsPerMissError" class="validationError"></p>
+					<button type="button" onclick="validacionFormulario()">Actualizar valores</button> <br>
+					<button type="button" id="botonIniciar" onclick="inicializar()">Empezar juego</button> <br>
+				</form>
 			</div>
 		</div>
-		<form id="controlPanel" method="post" action="index.html">
-			<label for="nameForm">Nuevo nombre</label>
-			<input id="nameForm">
-			<p id="nameError" class="validationError"></p>
-			<label for="pointsPerHitForm">Puntos por acertar</label>
-			<input id="pointsPerHitForm">
-			<p id="pointsPerHitError" class="validationError"></p>
-			<label for="pointsPerMissForm">Puntos por fallar</label>
-			<input id="pointsPerMissForm">
-			<p id="pointsPerMissError" class="validationError"></p>
-			<input type="submit" value="Actualizar valores">
-		</form>
 	</body>
 </html>
