@@ -123,14 +123,15 @@
 
     <script>
         let clickCount = 0;
+        let targetDate = new Date(new Date().getFullYear(), 1, 28); // February 28 of the current year
 
         function updateCountdown() {
-            const targetDate = new Date(new Date().getFullYear(), 1, 28); // February 28 of the current year
             const now = new Date();
             const timeDifference = targetDate - now;
 
+            //FIX
             if (timeDifference <= 0) {
-                document.getElementById('countdown').textContent = "Abrir regalo";
+                document.getElementById('countdown').textContent = "¡Ya es el día!";
                 document.querySelector('.front').style.background = 'green';
                 return;
             }
@@ -155,9 +156,20 @@
         pushableButton.addEventListener('mousedown', function() {
             pushableButton.classList.add('active');
             clickCount++;
-            if (clickCount > 5) {
-                alert('No seas impaciente.');
-                clickCount = 0; // Reset the counter after showing the alert
+            if (clickCount == 30) {
+                alert('Ya te recorté el tiempo, deja de presionarlo, vuelve cuando llegue el contador a 0.');
+            } else if (clickCount == 25) {
+                document.body.style.backgroundColor = 'yellow';
+                targetDate = new Date(new Date().getFullYear(), 1, 21); // February 21 of the current year
+                updateCountdown();
+            } else if (clickCount == 20) {
+                alert('¡Felicidades! Has presionado el botón 20 veces.');
+            } else if (clickCount == 15) {
+                alert('...');
+            } else if (clickCount == 10) {
+                alert('Deja de presionarlo...');
+            } else if (clickCount == 5) {
+                alert('No seas impaciente...');
             }
         });
         pushableButton.addEventListener('mouseup', function() {
