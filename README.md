@@ -1,1 +1,0 @@
-# delmirodb.github.io
