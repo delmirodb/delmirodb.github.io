@@ -112,9 +112,48 @@
         .pushable:focus:not(:focus-visible) {
             outline: none;
         }
+
+        .hidden {
+            display: none;
+        }
+        .image-container {
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     </style>
 </head>
 <body>
+    <div class="image-container hidden" id="giftImage" onclick="shakeImage()">
+        <img src="img/regalo.png" alt="Regalo" style="width: 100%; height: 100%;">
+    </div>
+    <script>
+        let clickCountRegalo = 0;
+        function shakeImage() {
+            clickCountRegalo++;
+            const image = document.getElementById('giftImage');
+            image.classList.add('shake');
+            setTimeout(() => {
+                image.classList.remove('shake');
+            }, 750); // Duration of the shake effect
+            if(clickCountRegalo >= 10) {
+                alert('No lo agites tanto, que se rompe...');
+            }
+        }
+    </script>
+    <style>
+        @keyframes shake {
+            0%, 100% { transform: translateX(-50%); }
+            25% { transform: translateX(-60%); }
+            50% { transform: translateX(-50%); }
+            75% { transform: translateX(-40%); }
+        }
+        .shake {
+            animation: shake 0.2s;
+            animation-iteration-count: 10;
+        }
+    </style>
     <button class="pushable" id="pushableButton">
         <span class="shadow"></span>
         <span class="edge"></span>
@@ -124,17 +163,11 @@
     <script>
         let clickCount = 0;
         let targetDate = new Date(new Date().getFullYear(), 1, 28); // February 28 of the current year
+        let showImageDate = new Date(new Date().getFullYear(), 1, 21);
 
         function updateCountdown() {
             const now = new Date();
             const timeDifference = targetDate - now;
-
-            //FIX
-            if (timeDifference <= 0) {
-                document.getElementById('countdown').textContent = "¡Ya es el día!";
-                document.querySelector('.front').style.background = 'green';
-                return;
-            }
 
             const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
             const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -142,6 +175,11 @@
             const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
             document.getElementById('countdown').textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            if (now >= showImageDate) {
+                document.body.style.backgroundColor = 'black';
+                document.getElementById('giftImage').classList.remove('hidden');
+            }
         }
         updateCountdown();
         setInterval(updateCountdown, 1000); // Update every second
@@ -154,22 +192,26 @@
             pushableButton.classList.remove('active');
         });
         pushableButton.addEventListener('mousedown', function() {
+            const now = new Date();
+            if (now >= showImageDate) {
+            alert('Este botón ya no funciona... el regalo está adentro de la caja, no puedes abrirlo hasta el 28 de febrero.');
+            }
             pushableButton.classList.add('active');
             clickCount++;
             if (clickCount == 30) {
-                alert('Ya te recorté el tiempo, deja de presionarlo, vuelve cuando llegue el contador a 0.');
+            alert('Ya te recorté el tiempo, deja de presionarlo, vuelve cuando llegue el contador a 0.');
             } else if (clickCount == 25) {
-                document.body.style.backgroundColor = 'yellow';
-                targetDate = new Date(new Date().getFullYear(), 1, 21); // February 21 of the current year
-                updateCountdown();
+            document.body.style.backgroundColor = 'yellow';
+            targetDate = new Date(new Date().getFullYear(), 1, 21); // February 21 of the current year
+            updateCountdown();
             } else if (clickCount == 20) {
-                alert('¡Felicidades! Has presionado el botón 20 veces.');
+            alert('¡Felicidades! Has presionado el botón 20 veces.');
             } else if (clickCount == 15) {
-                alert('...');
+            alert('...');
             } else if (clickCount == 10) {
-                alert('Deja de presionarlo...');
+            alert('Deja de presionarlo...');
             } else if (clickCount == 5) {
-                alert('No seas impaciente...');
+            alert('No seas impaciente...');
             }
         });
         pushableButton.addEventListener('mouseup', function() {
